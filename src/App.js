@@ -2,7 +2,7 @@ import React from 'react';
 import Navbar from './Components/Navbar/Navbar'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-import Attendance from './Components/Pages/Attendance';
+import Attendance from './Components/Pages//Attendance/Attendance';
 import Patients from './Components/Pages/Patients/Patients';
 import Billing from './Components/Pages/Billing';
 import SingUp from './Components/Pages/SingUp';

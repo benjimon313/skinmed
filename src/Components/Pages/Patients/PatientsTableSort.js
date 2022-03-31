@@ -1,7 +1,6 @@
 import * as React from "react";
 
 import PropTypes from "prop-types";
-import { alpha } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -11,16 +10,8 @@ import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import TableSortLabel from "@mui/material/TableSortLabel";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
+
 import Paper from "@mui/material/Paper";
-import Checkbox from "@mui/material/Checkbox";
-import IconButton from "@mui/material/IconButton";
-import Tooltip from "@mui/material/Tooltip";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Switch from "@mui/material/Switch";
-import DeleteIcon from "@mui/icons-material/Delete";
-import FilterListIcon from "@mui/icons-material/FilterList";
 import { visuallyHidden } from "@mui/utils";
 import { Button, Card, CardContent } from "@mui/material";
 import EditIcon from '@mui/icons-material/Edit';
@@ -37,19 +28,13 @@ function createData(id, firstName, lastName, age, phone, address) {
 }
 
 const rows = [
-  createData(6140972, "Sergio", "Medrano", 26, 67252723, "F. miranda"),
-  createData(3422362, "Mateo", "Sergio", 25, 77252723, "F. miranda"),
-  createData(2352362, "Pablo", "Sergio", 16, 87252723, "F. miranda"),
-  createData(1351356, "Juani", "Sergio", 6, 99252723, "F. miranda"),
-  createData(8532362, "Miguel", "Sergio", 16, 17252723, "F. miranda"),
-  createData(8357236, "Antonio", "Sergio", 3, 27252723, "F. miranda"),
-  createData(9462362, "Alvaro", "Sergio", 9, 37252723, "F. miranda"),
-  createData(6352362, "Andres", "Sergio", 10, 47252723, "F. miranda"),
-  createData(7352362, "Daniela", "Sergio", 26, 57252723, "F. miranda"),
-  createData(8352362, "Luciana", "Sergio", 10, 67252723, "F. miranda"),
-  createData(8322362, "Josi", "Sergio", 10, 73252723, "F. miranda"),
-  createData(9352362, "Gloria", "Sergio", 19, 87252723, "F. miranda"),
-  createData(2472362, "Ale", "Sergio", 18, 97252723, "F. miranda"),
+  createData(6140972, "Sergio", "Medrano", 26, 52767223, "F. miranda"),
+  createData(3422362, "Mateo", "Navia", 25, 77252723, "Obrajes"),
+  createData(2352362, "Pablo", "Gonzales", 16, 87252723, "Achumani"),
+  createData(1351356, "Juani", "Reyes", 6, 97239252, "Banzer"),
+  createData(8532362, "Miguel", "Quezada", 16, 17252723, "J. Ki"),
+  createData(8357236, "Antonio", "Gutierrez", 3, 27252723, "Buean"),
+  createData(6352362, "Andres", "Frias", 10, 47252723, "Jordan Rey")
 ];
 
 function descendingComparator(a, b, orderBy) {
