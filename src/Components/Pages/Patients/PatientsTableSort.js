@@ -13,29 +13,19 @@ import TableSortLabel from "@mui/material/TableSortLabel";
 
 import Paper from "@mui/material/Paper";
 import { visuallyHidden } from "@mui/utils";
-import { Button, Card, CardContent } from "@mui/material";
+import { Button, Card, CardContent, TextField } from "@mui/material";
 import EditIcon from '@mui/icons-material/Edit';
+import { useRecoilState } from "recoil";
+import { clientState } from "../../Atoms/clientAtom";
 
-function createData(id, firstName, lastName, age, phone, address) {
-  return {
-    id,
-    firstName,
-    lastName,
-    age,
-    phone,
-    address,
-  };
-}
+import AddCircleIcon from '@mui/icons-material/AddCircle';
 
-const rows = [
-  createData(6140972, "Sergio", "Medrano", 26, 52767223, "F. miranda"),
-  createData(3422362, "Mateo", "Navia", 25, 77252723, "Obrajes"),
-  createData(2352362, "Pablo", "Gonzales", 16, 87252723, "Achumani"),
-  createData(1351356, "Juani", "Reyes", 6, 97239252, "Banzer"),
-  createData(8532362, "Miguel", "Quezada", 16, 17252723, "J. Ki"),
-  createData(8357236, "Antonio", "Gutierrez", 3, 27252723, "Buean"),
-  createData(6352362, "Andres", "Frias", 10, 47252723, "Jordan Rey")
-];
+
+import { Link } from "react-router-dom";
+
+
+
+
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -67,7 +57,7 @@ function stableSort(array, comparator) {
 
 const headCells = [
   {
-    id: "id",
+    id: "ci",
     numeric: true,
     disablePadding: true,
     label: "CI",
@@ -167,6 +157,8 @@ EnhancedTableToolbar.propTypes = {
 };
 
 export default function PatientsTableSort() {
+  const [rows,setRows] = useRecoilState (clientState)
+;
   const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState("firstName");
   const [selected, setSelected] = React.useState([]);
@@ -191,6 +183,7 @@ export default function PatientsTableSort() {
 
   const handleClick = (event, name) => {
     const selectedIndex = selected.indexOf(name);
+    console.log(name, selectedIndex)
     let newSelected = [];
 
     if (selectedIndex === -1) {
@@ -222,6 +215,18 @@ export default function PatientsTableSort() {
     setDense(event.target.checked);
   };
 
+  const changeHandler = (index, text, label) =>{
+    let listaPacientes = [...rows];
+    label === 'ci' && (listaPacientes[index]={...listaPacientes[index], ci: text})
+    label === 'firstName' && (listaPacientes[index]={...listaPacientes[index], firstName: text})
+    label === 'lastName' && (listaPacientes[index]={...listaPacientes[index], lastName: text})
+    label === 'age' && (listaPacientes[index]={...listaPacientes[index], age: text})
+    label === 'phone' && (listaPacientes[index]={...listaPacientes[index], phone: text})
+    label === 'address' && (listaPacientes[index]={...listaPacientes[index], address: text})
+    setRows(listaPacientes);
+    console.log(index)
+
+  }
   const isSelected = (name) => selected.indexOf(name) !== -1;
 
   // Avoid a layout jump when reaching the last page with empty rows.
@@ -260,13 +265,12 @@ export default function PatientsTableSort() {
                       return (
                         <TableRow
                           hover
-                          onClick={(event) => handleClick(event, row.id)}
                           aria-checked={isItemSelected}
                           tabIndex={-1}
                           key={row.id}
                           selected={isItemSelected}
                         >
-                          <TableCell
+                          <TableCell 
                             component="th"
                             id={labelId}
                             scope="row"
@@ -274,20 +278,42 @@ export default function PatientsTableSort() {
                           >
                             {row.name}
                           </TableCell>
-                          <TableCell align="left">{row.id}</TableCell>
-                          <TableCell align="left">{row.firstName}</TableCell>
-                          <TableCell align="left">{row.lastName}</TableCell>
-                          <TableCell align="left">{row.age}</TableCell>
-                          <TableCell align="left">{row.phone}</TableCell>
-                          <TableCell align="left">{row.address}</TableCell>
+                          {!isItemSelected && (<TableCell align="left">{row.ci}</TableCell>)}
+                          {isItemSelected && (<TableCell align="left"><TextField value={row.ci} onChange={(event)=> changeHandler(row.id,event.target.value,'ci')}/></TableCell>)}
+                          {!isItemSelected && <TableCell align="left">{row.firstName}</TableCell>}
+                          {isItemSelected && (<TableCell align="left"><TextField value={row.firstName} onChange={(event)=> changeHandler(row.id,event.target.value,'firstName')}/></TableCell>)}
+                          {!isItemSelected && <TableCell align="left">{row.lastName}</TableCell>}
+                          {isItemSelected && (<TableCell align="left"><TextField value={row.lastName} onChange={(event)=> changeHandler(row.id,event.target.value,'lastName')}/></TableCell>)}
+                          {!isItemSelected && <TableCell align="left">{row.age}</TableCell>}
+                          {isItemSelected && (<TableCell align="left"><TextField value={row.age} onChange={(event)=> changeHandler(row.id,event.target.value,'age')}/></TableCell>)}
+                          {!isItemSelected && <TableCell align="left">{row.phone}</TableCell>}
+                          {isItemSelected && (<TableCell align="left"><TextField value={row.phone} onChange={(event)=> changeHandler(row.id,event.target.value,'phone')}/></TableCell>)}
+                          {!isItemSelected && <TableCell align="left">{row.address}</TableCell>}
+                          {isItemSelected && (<TableCell align="left"><TextField value={row.address} onChange={(event)=> changeHandler(row.id,event.target.value,'address')}/></TableCell>)}
+                
                           <TableCell>
                             <Button
                               variant="contained"
                               color="primary"
                               fullWidth
                               endIcon={<EditIcon />}
+                              onClick={(event) => handleClick(event, row.id)}
                             >
                               Editar
+                            </Button>
+                          </TableCell>
+                          <TableCell>
+                            <Button
+                              variant="contained"
+                              color="primary"
+                              fullWidth
+                              endIcon={<AddCircleIcon />}
+                            >
+                               <Link to={`/agregar-info?ci=${row.ci}`} 
+                                >
+                                  Agregar Informacion 
+                                </Link>
+                              
                             </Button>
                           </TableCell>
                         </TableRow>

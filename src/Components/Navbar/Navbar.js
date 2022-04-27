@@ -32,7 +32,7 @@ const Navbar = () => {
   return (
     <>
       <nav className="navbar">
-        <Link to="/" className="navbar-logo">
+        <Link to="/home" className="navbar-logo">
           SkinMed 
         </Link>
         <div className="menu-icon" onClick={handleClick}>
@@ -45,14 +45,19 @@ const Navbar = () => {
             </Link>
           </li>
 					<li className="nav-item" onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}> 
-            <Link to="/pacientes" className="nav-links" onClick={closeMobileMenu}>
-              Pacientes <i className="fas fa-caret-down" />
+            <Link to="/agregar-paciente" className="nav-links" onClick={closeMobileMenu}>
+              Pacientes 
             </Link>
-						{dropdown && <Dropdown/>}
           </li>
-					<li className="nav-item">
-            <Link to="/facturacion" className="nav-links" onClick={closeMobileMenu}>
-              Facturacion
+          <li className="nav-item">
+            <Link to="/procedimientos" className="nav-links" onClick={closeMobileMenu}>
+              Procedimientos
+            </Link>
+          </li>
+					
+          <li className="nav-item">
+            <Link to="/agenda" className="nav-links" onClick={closeMobileMenu}>
+              Agenda
             </Link>
           </li>
 					<li className="nav-item">
@@ -60,6 +65,7 @@ const Navbar = () => {
               Cerrar Sesion
             </Link>
           </li>
+          
         </ul>
 				<Button />
       </nav>

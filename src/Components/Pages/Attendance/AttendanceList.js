@@ -10,16 +10,19 @@ import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import TableSortLabel from "@mui/material/TableSortLabel";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
+
+import { useRecoilState } from "recoil";
+import { clientState } from "../../Atoms/clientAtom";
 
 import Paper from "@mui/material/Paper";
 import { visuallyHidden } from "@mui/utils";
 import { Button, Card, CardContent } from "@mui/material";
-import EditIcon from '@mui/icons-material/Edit';
-
-import { useRecoilState } from "recoil";
-import { clientSelectedState } from "../../Atoms/clientAtom";
+import EditIcon from "@mui/icons-material/Edit";
+import MedicalServicesIcon from "@mui/icons-material/MedicalServices";
 
 
+import { Link } from "react-router-dom";
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -51,7 +54,7 @@ function stableSort(array, comparator) {
 
 const headCells = [
   {
-    id: "id",
+    id: "ci",
     numeric: true,
     disablePadding: true,
     label: "CI",
@@ -73,18 +76,6 @@ const headCells = [
     numeric: true,
     disablePadding: false,
     label: "Edad",
-  },
-  {
-    id: "phone",
-    numeric: true,
-    disablePadding: false,
-    label: "Telefono",
-  },
-  {
-    id: "address",
-    numeric: false,
-    disablePadding: false,
-    label: "Direccion",
   },
 ];
 
@@ -143,15 +134,16 @@ EnhancedTableHead.propTypes = {
 const EnhancedTableToolbar = (props) => {
   const { numSelected } = props;
 
-  return <div> </div>;
+  return <div>Lista de Pacientes: </div>;
 };
 
 EnhancedTableToolbar.propTypes = {
   numSelected: PropTypes.number.isRequired,
 };
 
-export default function PatientsTable() {
-  const [rows,setRows] = useRecoilState (clientSelectedState)
+export default function AttendanceList() {
+  const [rows, setRows] = useRecoilState(clientState);
+
   const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState("firstName");
   const [selected, setSelected] = React.useState([]);
@@ -231,35 +223,69 @@ export default function PatientsTable() {
                   orderBy={orderBy}
                   onSelectAllClick={handleSelectAllClick}
                   onRequestSort={handleRequestSort}
-                  
+                  rowCount={rows.length}
                 />
                 <TableBody>
-                
+                  {/* if you don't need to support IE11, you can replace the `stableSort` call with:
+                 rows.slice().sort(getComparator(order, orderBy)) */}
+                  {stableSort(rows, getComparator(order, orderBy))
+                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                    .map((row, index) => {
+                      const isItemSelected = isSelected(row.id);
+                      const labelId = `enhanced-table-checkbox-${index}`;
+
+                      return (
                         <TableRow
                           hover
-                          onClick={(event) => handleClick(event, rows.id)}
-                          
+                          onClick={(event) => handleClick(event, row.id)}
+                          aria-checked={isItemSelected}
                           tabIndex={-1}
-                          key={rows.id}
-                          
+                          key={row.id}
+                          selected={isItemSelected}
                         >
-                          <TableCell 
+                          <TableCell
                             component="th"
-                            id={rows.id}
+                            id={labelId}
                             scope="row"
                             padding="none"
                           >
-                            {rows.name}
+                            {row.name}
                           </TableCell>
-                          <TableCell align="left">{rows.id}</TableCell>
-                          <TableCell align="left">{rows.firstName}</TableCell>
-                          <TableCell align="left">{rows.lastName}</TableCell>
-                          <TableCell align="left">{rows.age}</TableCell>
-                          <TableCell align="left">{rows.phone}</TableCell>
-                          <TableCell align="left">{rows.address}</TableCell>
-                        
+                          <TableCell align="left">{row.ci}</TableCell>
+                          <TableCell align="left">{row.firstName}</TableCell>
+                          <TableCell align="left">{row.lastName}</TableCell>
+                          <TableCell align="left">{row.age}</TableCell>
+                          <TableCell>
+                            <Button
+                              variant="contained"
+                              color="primary"
+                              fullWidth
+                              endIcon={<MedicalServicesIcon />}
+                            >
+                              <Link to="/historial-clinico">
+                              Historial Clinico
+                              </Link>
+                            </Button>
+                          </TableCell>
+                          <TableCell>
+                            
+                              <Button
+                                variant="contained"
+                                color="primary"
+                                fullWidth
+                                endIcon={<AddCircleIcon />}
+                                
+                              >
+                                <Link to={`/atencion-medica?ci=${row.ci}`} 
+                                >
+                              Nuevo Registro
+                              </Link>
+                              </Button>
+                            
+                          </TableCell>
                         </TableRow>
-                      
+                      );
+                    })}
                   {emptyRows > 0 && (
                     <TableRow
                       style={{
@@ -272,9 +298,16 @@ export default function PatientsTable() {
                 </TableBody>
               </Table>
             </TableContainer>
-           
+            <TablePagination
+              rowsPerPageOptions={[5, 10, 25]}
+              component="div"
+              count={rows.length}
+              rowsPerPage={rowsPerPage}
+              page={page}
+              onPageChange={handleChangePage}
+              onRowsPerPageChange={handleChangeRowsPerPage}
+            />
           </Paper>
-          
         </Box>
       </CardContent>
     </Card>

@@ -1,13 +1,13 @@
 import React from "react";
 
-import PatientsForm from "./PatientsForm";
-import PatientsTable from "./PatientsTable";
+import PatientsNew from "./PatientsNew";
 import PatientsTableSort from "./PatientsTableSort";
 
 const PatientsAdd = () => {
   return (
     <div>
-      <PatientsForm />
+      <PatientsNew />
+    
       <PatientsTableSort/>
     </div>
   );

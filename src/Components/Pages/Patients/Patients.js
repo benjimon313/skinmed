@@ -1,9 +1,16 @@
-import React from 'react'
+import React from "react";
+
+import PatientsNew from "./PatientsNew";
+import PatientsTableSort from "./PatientsTableSort";
 
 const Patients = () => {
   return (
-    <div>Patients</div>
-  )
-}
+    <div>
+      <PatientsNew />
+    
+      <PatientsTableSort/>
+    </div>
+  );
+};
 
-export default Patients
+export default Patients;
