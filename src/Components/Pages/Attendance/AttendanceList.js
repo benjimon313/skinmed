@@ -134,7 +134,7 @@ EnhancedTableHead.propTypes = {
 const EnhancedTableToolbar = (props) => {
   const { numSelected } = props;
 
-  return <div>Lista de Pacientes: </div>;
+  return <div><h3>Lista de Pacientes: </h3></div>;
 };
 
 EnhancedTableToolbar.propTypes = {
@@ -262,7 +262,7 @@ export default function AttendanceList() {
                               fullWidth
                               endIcon={<MedicalServicesIcon />}
                             >
-                              <Link to="/historial-clinico">
+                              <Link to={`/historial-clinico?ci=${row.ci}`} >
                               Historial Clinico
                               </Link>
                             </Button>

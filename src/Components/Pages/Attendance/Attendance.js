@@ -9,9 +9,8 @@ import AttendanceHistory from "./AttendanceHistory";
 const Attendance = () => {
   return (
     <div>
+      
     <AttendanceList/>
-    {/* <AttendancePatient/> */}
-    {/* <AttendanceHistory/> */}
     </div>
   );
 };

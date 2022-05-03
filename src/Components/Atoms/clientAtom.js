@@ -8,7 +8,7 @@ export const clientState = atom({
       ci: 6140972,
       firstName: "Sergio",
       lastName: "Medrano",
-      age: 26,
+      age: `26/10/1995`,
       phone: 52767223,
       address: "F. miranda",
       extraInfo:{
@@ -24,7 +24,7 @@ export const clientState = atom({
       ci: 3422362,
       firstName: "Mateo",
       lastName: "Navia",
-      age: 25,
+      age: `26/10/1995`,
       phone: 77252723,
       address: "Obrajes",
       extraInfo:{
@@ -39,7 +39,7 @@ export const clientState = atom({
       ci: 2352362,
       firstName: "Pablo",
       lastName: "Gonzales",
-      age: 16,
+      age: `26/10/1995`,
       phone: 87252723,
       address: "Achumani",
       extraInfo:{
@@ -54,7 +54,7 @@ export const clientState = atom({
       ci: 1351356,
       firstName: "Juani",
       lastName: "Reyes",
-      age: 6,
+      age: `26/10/1995`,
       phone: 97239252,
       address: "Banzer",
       extraInfo:{
@@ -69,7 +69,7 @@ export const clientState = atom({
       ci: 8532362,
       firstName: "Miguel",
       lastName: "Quezada",
-      age: 16,
+      age: `26/10/1995`,
       phone: 17252723,
       address: "J. Ki",
       extraInfo:{
@@ -84,7 +84,7 @@ export const clientState = atom({
       ci: 8357236,
       firstName: "Antonio",
       lastName: "Gutierrez",
-      age: 3,
+      age: `26/10/1995`,
       phone: 27252723,
       address: "Buean",
       extraInfo:{
@@ -99,7 +99,7 @@ export const clientState = atom({
       ci: 6352362,
       firstName: "Andres",
       lastName: "Frias",
-      age: 10,
+      age: `26/10/1995`,
       phone: 47252723,
       address: "Jordan Rey",
       extraInfo:{

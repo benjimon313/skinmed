@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Navbar from './Components/Navbar/Navbar'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
@@ -17,6 +17,8 @@ import { RecoilRoot } from 'recoil';
 import AttendancePatient from './Components/Pages/Attendance/AttendancePatient';
 import AttendanceHistory from './Components/Pages/Attendance/AttendanceHistory';
 
+import Login from './Components/Pages/Login';
+
 
 
 
@@ -24,6 +26,11 @@ import AttendanceHistory from './Components/Pages/Attendance/AttendanceHistory';
 
 
 function App() {
+  const [token, setToken] = useState();
+
+  if(!token) {
+    // return <Login setToken={setToken} />
+  }
   return (
     <RecoilRoot>
     <Router >

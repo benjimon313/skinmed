@@ -78,7 +78,7 @@ const headCells = [
     id: "age",
     numeric: true,
     disablePadding: false,
-    label: "Edad",
+    label: "Fecha de Nacimiento",
   },
   {
     id: "phone",
@@ -149,7 +149,7 @@ EnhancedTableHead.propTypes = {
 const EnhancedTableToolbar = (props) => {
   const { numSelected } = props;
 
-  return <div>Lista de Pacientes: </div>;
+  return <div><h3>Lista de Pacientes: </h3></div>;
 };
 
 EnhancedTableToolbar.propTypes = {

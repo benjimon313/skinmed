@@ -1,103 +1,76 @@
 import React, { useState } from "react";
 
+import { useRecoilState } from "recoil";
+import { proceduresState } from "../../../Atoms/proceduresAtom";
+
 import { Card, Grid, CardContent, TextField, Button } from "@mui/material";
-import CancelIcon from '@mui/icons-material/Cancel';
-import AddCircleIcon from '@mui/icons-material/AddCircle';
+import CancelIcon from "@mui/icons-material/Cancel";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
 
 import "./ExpenseForm.css";
 
 const ExpenseForm = (props) => {
-  const [enteredTitle, setEnteredTitle] = useState("");
-  const [enteredAmount, setEnteredAmount] = useState("");
-  const [enteredDate, setEnteredDate] = useState("");
-  // const [userInput, setUserInput] = useState({
-  //   enteredTitle: '',
-  //   enteredAmount: '',
-  //   enteredDate: '',
-  // });
+  const [rows, setRows] = useRecoilState(proceduresState);
 
-  const titleChangeHandler = (event) => {
-    setEnteredTitle(event.target.value);
-    // setUserInput({
-    //   ...userInput,
-    //   enteredTitle: event.target.value,
-    // });
-    // setUserInput((prevState) => {
-    //   return { ...prevState, enteredTitle: event.target.value };
-    // });
+  const [nuevoProcedimiento, setNuevoProcedimiento] = useState({});
+
+  const changeHandler = (text, label) => {
+    let procedimiento = nuevoProcedimiento;
+    procedimiento = { ...procedimiento, id: rows.length };
+    label === "name" && (procedimiento = { ...procedimiento, name: text });
+    label === "price" && (procedimiento = { ...procedimiento, price: text });
+    setNuevoProcedimiento(procedimiento);
   };
 
-  const amountChangeHandler = (event) => {
-    setEnteredAmount(event.target.value);
-    // setUserInput({
-    //   ...userInput,
-    //   enteredAmount: event.target.value,
-    // });
+  const addHandler = (event) => {
+    event.preventDefault()
+    let listaProcedimiento = [...rows];
+    listaProcedimiento.push(nuevoProcedimiento);
+    setRows(listaProcedimiento);
   };
-
-  const dateChangeHandler = (event) => {
-    setEnteredDate(event.target.value);
-    // setUserInput({
-    //   ...userInput,
-    //   enteredDate: event.target.value,
-    // });
-  };
-
-  const submitHandler = (event) => {
-    event.preventDefault();
-
-    const expenseData = {
-      title: enteredTitle,
-      amount: enteredAmount,
-      date: new Date(enteredDate),
-    };
-
-    props.onSaveExpenseData(expenseData);
-    setEnteredTitle("");
-    setEnteredAmount("");
-    setEnteredDate("");
-  };
+console.log(nuevoProcedimiento)
 
   return (
     <div>
       <Card>
         <CardContent>
-          <form onSubmit={submitHandler}>
+          <form>
             <Grid container spacing={1}>
               <Grid item xs={6} sx={{ m: 1, p: 2 }}>
                 <TextField
+                  onChange={(event) => {
+                    changeHandler(event.target.value, "name");
+                  }}
                   id="title"
                   label="Procedimiento Medico"
                   helperText="Ingresar el nombre del procedimiento"
                   variant="outlined"
                   fullWidth
                   required
-                  type="text"
-                  value={enteredTitle}
-                  onChange={titleChangeHandler}
                 />
               </Grid>
               <Grid item xs={3} sx={{ m: 1, p: 2 }}>
                 <TextField
+                  onChange={(event) =>
+                    changeHandler(event.target.value, "price")
+                  }
                   id="price"
                   label="Precio"
                   helperText="Ingresar el precio del procedimiento"
                   variant="outlined"
                   fullWidth
                   required
-                  type="text"
-                  value={enteredTitle}
-                  onChange={amountChangeHandler}
                 />
               </Grid>
-             
             </Grid>
 
             <div className="new-expense__actions">
-              <Button type="button" onClick={props.onCancel} endIcon={<CancelIcon/>}>
+              <Button onClick={props.onCancel} endIcon={<CancelIcon />}>
                 Cancelar
               </Button>
-              <Button type="submit" endIcon={<AddCircleIcon/>}>Agregar Procedimiento</Button>
+              <Button onClick={addHandler} type="submit" endIcon={<AddCircleIcon />}>
+                Agregar Procedimiento
+              </Button>
             </div>
           </form>
         </CardContent>
