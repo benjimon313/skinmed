@@ -42,6 +42,7 @@ const AttendancePatient = () => {
     ci: parseInt(urlParams.get("ci"), 10),
     planTrat: "",
     presion: "",
+    date: new Date(),
     temp: "",
     peso: "",
     talla: "",
@@ -150,10 +151,10 @@ const AttendancePatient = () => {
               <TableRow
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
-                <TableCell align="center">{clientData.ci}</TableCell>
-                <TableCell align="center">{clientData.firstName}</TableCell>
-                <TableCell align="center">{clientData.lastName}</TableCell>
-                <TableCell align="center">{clientData.phone}</TableCell>
+                <TableCell align="center">{clientData?.ci}</TableCell>
+                <TableCell align="center">{clientData?.firstName}</TableCell>
+                <TableCell align="center">{clientData?.lastName}</TableCell>
+                <TableCell align="center">{clientData?.phone}</TableCell>
               </TableRow>
             </TableBody>
           </Table>
@@ -348,9 +349,10 @@ const AttendancePatient = () => {
             <Grid item xs={12} sm={5}>
               <Box sx={{ p: 2, m: 1, border: "1px solid grey" }}>
                 <h3>Planes de tratamiento: </h3>
-                <FormControl fullWidth>
+                <FormControl fullWidth sx={{ m: 2, p:1}}>
                   <InputLabel id="demo-simple-select-label">Procedimiento Medico</InputLabel>
                   <Select
+                  
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
                     label="Procedimiento Medico"
@@ -358,8 +360,9 @@ const AttendancePatient = () => {
                       changeProcedureHandler(event.target.value)
                     }
                   >
+
                     {procedures.map((procedure) =>
-                      <MenuItem value={procedure.id}>{procedure.name}</MenuItem>
+                      <MenuItem value={procedure?.id}>{procedure?.name}</MenuItem>
                     )}
                   </Select>
                 </FormControl>

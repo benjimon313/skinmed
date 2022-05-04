@@ -14,7 +14,14 @@ import { getYears, getMonths, getDays } from "../funciones";
 const PatientsForm = (props) => {
   const [rows, setRows] = useRecoilState(clientState);
 
-  const [nuevoPaciente, setNuevoPaciente] = useState({});
+  const [nuevoPaciente, setNuevoPaciente] = useState({ci:"",firstName:"",lastName:"", phone:"", age:"", address:""});
+  const [isEmptyCI, SetIsEmptyCI] = useState(false);
+  const [isEmptyFirstName, SetIsEmptyFirstName] = useState(false);
+  const [isEmptyLastName, SetIsEmptyLastName] = useState(false);
+  const [isEmptyPhone, SetIsEmptyPhone] = useState(false);
+  const [isEmptyAge, SetIsEmptyAge] = useState(false);
+  const [isEmptyAddress, SetIsEmptyAddress] = useState(false);
+
 
   const [day, setDay] = useState("");
   const [days, setDays] = useState([]);
@@ -30,6 +37,7 @@ const PatientsForm = (props) => {
 }, []);
   const changeHandler = (text, label) => {
     let paciente = nuevoPaciente;
+    console.log(day,month,year)
     paciente = { ...paciente, id: rows.length };
     paciente = { ...paciente, age: `${day}/${month}/${year}` }
     label === "ci" && (paciente = { ...paciente, ci: text });
@@ -37,22 +45,45 @@ const PatientsForm = (props) => {
     label === "lastName" && (paciente = { ...paciente, lastName: text });
     label === "phone" && (paciente = { ...paciente, phone: text });
     label === "address" && (paciente = { ...paciente, address: text });
+    if(label === "ci" && (text.length <= 0 || !isNumeric(text))) SetIsEmptyCI(true)
+    if(label === "ci" && (text.length > 0 && isNumeric(text))) SetIsEmptyCI(false)
+    if(label === "firstName" && (text.length <= 0 || isNumeric(text))) SetIsEmptyFirstName(true)
+    if(label === "firstName" && (text.length > 0 && !isNumeric(text))) SetIsEmptyFirstName(false)
+    if(label === "lastName" && (text.length <= 0 || isNumeric(text))) SetIsEmptyLastName(true)
+    if(label === "lastName" && (text.length > 0 && !isNumeric(text))) SetIsEmptyLastName(false)
+    if(label === "phone" && (text.length <= 0 || !isNumeric(text))) SetIsEmptyPhone(true)
+    if(label === "phone" && (text.length > 0 && isNumeric(text))) SetIsEmptyPhone(false)
+    if(label === "address" && (text.length <= 0)) SetIsEmptyAddress(true)
+    if(label === "address" && (text.length > 0)) SetIsEmptyAddress(false)
     setNuevoPaciente(paciente);
   };
+  function isNumeric(value) {
+    return /^-?\d+$/.test(value);
+}
 
+function isEmpty() {
+  console.log(nuevoPaciente);
+  if (nuevoPaciente.ci === "" || 
+      nuevoPaciente.firstName === "" || 
+      nuevoPaciente.lastName === "" || 
+      nuevoPaciente.phone === "" || 
+      nuevoPaciente.age === "" || 
+      nuevoPaciente.address === "" ){
+    return(true)
+  }else{
+    return(false)
+  }
+}
   const addHandler = () => {
-    let listaPacientes = [...rows];
-    listaPacientes.push(nuevoPaciente);
-    console.log(nuevoPaciente)
-    setRows(listaPacientes);
-  };
-  const validate = (event) => {
-    const errors = {};
-    if (!event.target.value.firstName) {
-      errors.firstName = "ingrese un nombre";
-    }
-  };
 
+
+    if(!isEmpty())
+    {let listaPacientes = [...rows];
+    listaPacientes.push(nuevoPaciente);
+    
+    setRows(listaPacientes);} else{console.log("uwu")}
+  };
+  
   return (
     <div>
       <Card>
@@ -61,9 +92,10 @@ const PatientsForm = (props) => {
             <Grid container spacing={1}>
               <Grid xs={6} item>
                 <TextField
+                  error={isEmptyFirstName} 
                   onChange={(event) => {
                     changeHandler(event.target.value, "firstName");
-                    validate(event);
+                    
                   }}
                   id="firstname"
                   label="Nombres"
@@ -75,6 +107,7 @@ const PatientsForm = (props) => {
               </Grid>
               <Grid xs={6} item>
                 <TextField
+                error={isEmptyLastName} 
                   onChange={(event) =>
                     changeHandler(event.target.value, "lastName")
                   }
@@ -88,6 +121,7 @@ const PatientsForm = (props) => {
               </Grid>
               <Grid xs={6} item>
                 <TextField
+                error={isEmptyCI} 
                   onChange={(event) => changeHandler(event.target.value, "ci")}
                   id="ci"
                   label="CI"
@@ -112,6 +146,7 @@ const PatientsForm = (props) => {
                         setMonth(option.value);
                         setYears(getYears(option.value, day));
                         setDays(getDays(option.value, year));
+                        changeHandler()
                       }}
                     >
                       <option value="" hidden>
@@ -133,6 +168,7 @@ const PatientsForm = (props) => {
                         setDay(option.value);
                         setYears(getYears(month, option.value));
                         setMonths(getMonths(option.value, year));
+                        changeHandler()
                       }}
                     >
                       <option value="" hidden>
@@ -154,6 +190,7 @@ const PatientsForm = (props) => {
                         setYear(option.value);
                         setDays(getDays(month, option.value));
                         setMonths(getMonths(day, option.value));
+                        changeHandler()
                       }}
                     >
                       <option value="" hidden>
@@ -170,6 +207,7 @@ const PatientsForm = (props) => {
               </Grid>
               <Grid xs={6} item>
                 <TextField
+                error={isEmptyPhone}
                   onChange={(event) =>
                     changeHandler(event.target.value, "phone")
                   }
@@ -183,6 +221,7 @@ const PatientsForm = (props) => {
               </Grid>
               <Grid xs={12} item>
                 <TextField
+                error={isEmptyAddress} 
                   onChange={(event) =>
                     changeHandler(event.target.value, "address")
                   }

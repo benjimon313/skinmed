@@ -1,8 +1,14 @@
 import React from 'react'
+import AgendaNew from './AgendaNew'
+import AgendaTable from './AgendaTable'
 
 const Agenda = () => {
   return (
-    <div>Agenda</div>
+    <div>
+      <AgendaNew/>
+
+			<AgendaTable/>
+    </div>
   )
 }
 

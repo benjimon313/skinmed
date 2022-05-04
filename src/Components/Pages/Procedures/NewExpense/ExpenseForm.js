@@ -12,7 +12,9 @@ import "./ExpenseForm.css";
 const ExpenseForm = (props) => {
   const [rows, setRows] = useRecoilState(proceduresState);
 
-  const [nuevoProcedimiento, setNuevoProcedimiento] = useState({});
+  const [nuevoProcedimiento, setNuevoProcedimiento] = useState({name:"", price:""});
+  const [isEmptyName, SetIsEmptyName] = useState(false);
+  const [isEmptyPrice, SetIsEmptyPrice] = useState(false);
 
   const changeHandler = (text, label) => {
     let procedimiento = nuevoProcedimiento;
