@@ -3,8 +3,9 @@ import React, { useState } from "react";
 import { Card, Grid, CardContent, TextField, Button } from "@mui/material";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import AgendaForm from "./AgendaForm";
-import "./Agenda.css"
 
+
+import "./Agenda.css"
 
 const AgendaNew = (props) => {
     const [isEditing, setIsEditing] = useState(false);
@@ -27,15 +28,18 @@ const AgendaNew = (props) => {
       setIsEditing(false);
     };
     return (
-      <div className="new-expense">
+      <div className="new-agenda">
         {!isEditing && (
-          <Button onClick={startEditingHandler} endIcon={<AddCircleIcon/>}>agendar cita</Button>
+          <Button className="blue-button" onClick={startEditingHandler} endIcon={<AddCircleIcon/>}>agendar cita</Button>
         )}
         {isEditing && (
-          <AgendaForm
+          
+          <AgendaForm 
             onSaveExpenseData={saveExpenseDataHandler}
             onCancel={stopEditingHandler}
+            
           />
+          
         )}
       </div>
     );

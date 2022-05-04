@@ -21,6 +21,7 @@ import { Button, Card, CardContent } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import MedicalServicesIcon from "@mui/icons-material/MedicalServices";
 
+import LibraryBooksIcon from "@mui/icons-material/LibraryBooks";
 
 import { Link } from "react-router-dom";
 
@@ -75,7 +76,7 @@ const headCells = [
     id: "age",
     numeric: true,
     disablePadding: false,
-    label: "Edad",
+    label: "Fecha de Nacimiento",
   },
 ];
 
@@ -134,7 +135,11 @@ EnhancedTableHead.propTypes = {
 const EnhancedTableToolbar = (props) => {
   const { numSelected } = props;
 
-  return <div><h3>Lista de Pacientes: </h3></div>;
+  return (
+    <div>
+      <h3>Lista de Pacientes: </h3>
+    </div>
+  );
 };
 
 EnhancedTableToolbar.propTypes = {
@@ -207,6 +212,12 @@ export default function AttendanceList() {
 
   return (
     <Card>
+      <div className="new-expense">
+        <Button endIcon={<LibraryBooksIcon />}>
+          <Link to={"/registros-diarios"}>Registros diarios</Link>
+          
+        </Button>
+      </div>
       <CardContent>
         <Box sx={{ width: "100%" }}>
           <Paper sx={{ width: "100%", mb: 2 }}>
@@ -262,26 +273,22 @@ export default function AttendanceList() {
                               fullWidth
                               endIcon={<MedicalServicesIcon />}
                             >
-                              <Link to={`/historial-clinico?ci=${row.ci}`} >
-                              Historial Clinico
+                              <Link to={`/historial-clinico?ci=${row.ci}`}>
+                                Historial Clinico
                               </Link>
                             </Button>
                           </TableCell>
                           <TableCell>
-                            
-                              <Button
-                                variant="contained"
-                                color="primary"
-                                fullWidth
-                                endIcon={<AddCircleIcon />}
-                                
-                              >
-                                <Link to={`/atencion-medica?ci=${row.ci}`} 
-                                >
-                              Nuevo Registro
+                            <Button
+                              variant="contained"
+                              color="primary"
+                              fullWidth
+                              endIcon={<AddCircleIcon />}
+                            >
+                              <Link to={`/atencion-medica?ci=${row.ci}`}>
+                                Nuevo Registro
                               </Link>
-                              </Button>
-                            
+                            </Button>
                           </TableCell>
                         </TableRow>
                       );

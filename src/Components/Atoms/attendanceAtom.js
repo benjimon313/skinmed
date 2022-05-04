@@ -8,27 +8,32 @@ export const attendanceState = atom({
         ci: 6352362,
         presion: '90',
         temp: '30',
-        peso:'20',
+        peso:'77',
         talla:'168',
-        frecCard: '89',
-        frecResp: '99',
-        motivConsult: 'doloru',
-        explFisica:'dolie',
-        diagnostico: 'muerto',
+        frecCard: '90',
+        frecResp: '20 Sistolica -130',
+        motivConsult: 'Control de estudios',
+        explFisica:'Conciente orientada hidratada',
+        diagnostico: 'Modulo hepatico en estudios',
         planTrat:'',
         cie10:'',
         receta: [{
-            nombre:'paracetamol',
+            nombre:'Ciproterona ',
+            formaAdmin:'oral',
+            dosific:'800',
+            indicaciones:'cada 9 horas'
+        },{
+            nombre:'Acetato Estradiol',
             formaAdmin:'oral',
             dosific:'800',
             indicaciones:'cada 9 horas'
         }],
         procedimientoMedico: [{
-            procedimiento:'botox',
+            procedimiento:'Ac. inyeccion ',
             precio: '400'
         }],
         examenes: [{
-            nombre:'radiox',
+            nombre:'Diferido',
             descripcion:'describiendo',
         },{
             nombre:'rada',

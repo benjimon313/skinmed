@@ -10,7 +10,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-
+import { Link } from "react-router-dom";
 import Accordion from "@mui/material/Accordion";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
@@ -21,6 +21,7 @@ import { useRecoilState } from "recoil";
 import { clientSelectedState, clientState } from "../../Atoms/clientAtom";
 import { attendanceState } from "../../Atoms/attendanceAtom";
 import { CarCrash } from "@mui/icons-material";
+
 
 import "./AttendanceHistory.css";
 
@@ -126,16 +127,7 @@ const AttendanceHistory = () => {
                 </TableBody>
               </Table>
             </TableContainer>
-            <div className="new-expense__actions">
-              <Button
-                sx={{ m: 2, p: 1 }}
-                variant="contained"
-                color="primary"
-                endIcon={<FileDownloadIcon />}
-              >
-                Exportar historial completo
-              </Button>
-            </div>
+           
           </div>
         </CardContent>
 
@@ -224,14 +216,25 @@ const AttendanceHistory = () => {
                   </TableContainer>
                 </Typography>
                 <div className="new-expense__actions">
+                <Button
+                    sx={{ m: 2, p: 1 }}
+                    variant="contained"
+                    color="primary"
+                    endIcon={<FileDownloadIcon />}
+                  >
+                    <Link to={"/factura-pdf"}>
+                      Recibo PDF</Link>
+                  </Button>
                   <Button
                     sx={{ m: 2, p: 1 }}
                     variant="contained"
                     color="primary"
                     endIcon={<FileDownloadIcon />}
                   >
-                    Exportar registro
+                    <Link to={"/registros-pdf"}>Exportar PDF Consulta</Link>
+                    
                   </Button>
+                 
                 </div>
               </AccordionDetails>
             </Accordion>

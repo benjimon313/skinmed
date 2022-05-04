@@ -11,17 +11,21 @@ import PatientsInfo from './Components/Pages/Patients/PatientsInfo';
 import PatientsTableSort from './Components/Pages/Patients/PatientsTableSort';
 import Procedures from './Components/Pages/Procedures/Procedures';
 import HomeScrean from './Components/Pages/HomeScrean';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import esLocale from 'date-fns/locale/es'
+
 
 import './App.css';
+
 import { RecoilRoot } from 'recoil';
 import AttendancePatient from './Components/Pages/Attendance/AttendancePatient';
 import AttendanceHistory from './Components/Pages/Attendance/AttendanceHistory';
 
 import Login from './Components/Pages/Login';
-
-
-
-
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import AttendanceDiary from './Components/Pages/Attendance/AttendanceDiary';
+import FacturaPDF from './Components/Pages/Attendance/FacturaPDF';
+import AttendancePDF from './Components/Pages/Attendance/AttendancePDF';
 
 
 
@@ -31,7 +35,9 @@ function App() {
   if(!token) {
     // return <Login setToken={setToken} />
   }
+
   return (
+    <LocalizationProvider locale={esLocale} dateAdapter={AdapterDateFns}>
     <RecoilRoot>
     <Router >
       <Navbar />
@@ -46,11 +52,14 @@ function App() {
         <Route path='/agregar-info'  element={<PatientsInfo/>}/>
         <Route path='/lista-paciente'  element={<PatientsTableSort/>}/>
         <Route path='/atencion-medica'  element={<AttendancePatient/>}/>
-
+        <Route path='/registros-diarios'  element={<AttendanceDiary/>}/>
         <Route path='/historial-clinico'  element={<AttendanceHistory/>}/>
+        <Route path='/factura-pdf'  element={<FacturaPDF/>}/>
+        <Route path='/registros-pdf'  element={<AttendancePDF/>}/>
       </Routes>
     </Router>
     </RecoilRoot>
+    </LocalizationProvider>
   );
 }
 

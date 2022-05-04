@@ -11,3 +11,32 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+
+.blue-button {
+  font: inherit !important;
+  cursor: pointer!important;
+  padding: 1rem 2rem!important;
+  border: 1px solid #0073ff!important;
+  background-color: #0073ff !important;
+  color: white!important;
+  border-radius: 12px!important;
+  margin-right: 1rem!important;
+}
+
+.blue-button:hover,
+.blue-button:active {
+  background-color: #006eff!important;
+  border-color: #006eff!important;
+}
+
+.blue-button.alternative {
+  color: #220131!important;
+  border-color: transparent!important;
+  background-color: transparent!important;
+}
+
+.blue-button.alternative:hover,
+.blue-button.alternative:active {
+  background-color: #ddb3f8!important;
+}
