@@ -1,13 +1,13 @@
-import React from 'react';
-import './Button.css'
-import {Link} from 'react-router-dom';
+import React from "react";
+import { useRecoilState } from "recoil";
+import { activeUserState } from "../Atoms/userAtom";
+import "./Button.css";
 
-export function Button () {
-    return(
-        <Link to='iniciar-sesion'>
-            <button className='btn'>
-                Cerrar Sesion
-            </button>
-        </Link>
-    )
+export function Button() {
+  const [activeUser, setActiveUser] = useRecoilState(activeUserState);
+  return (
+    <button className="btn" onClick={() => setActiveUser(null)}>
+      Cerrar Sesion
+    </button>
+  );
 }

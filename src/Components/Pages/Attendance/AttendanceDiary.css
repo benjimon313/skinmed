@@ -1,0 +1,39 @@
+.new-agenda {
+    background-color: #ffffff;
+    padding: 1rem;
+    margin: 2rem auto;
+    width: 50rem;
+    max-width: 95%;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.25);
+  }
+  
+  .new-agendabut {
+    font: inherit;
+    cursor: pointer;
+    padding: 1rem 2rem;
+    border: 1px solid #0073ff;
+    background-color: #0073ff;
+    color: white;
+    border-radius: 12px;
+    margin-right: 1rem;
+  }
+  
+  .new-agendabut:hover,
+  .new-agendabut:active {
+    background-color: #006eff;
+    border-color: #006eff;
+  }
+  
+  .new-agendabut.alternative {
+    color: #220131;
+    border-color: transparent;
+    background-color: transparent;
+  }
+  
+  .new-agendabut.alternative:hover,
+  .new-agendabut.alternative:active {
+    background-color: #ddb3f8;
+  }
+  

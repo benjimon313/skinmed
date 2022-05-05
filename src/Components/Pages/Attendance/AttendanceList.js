@@ -12,7 +12,7 @@ import TableRow from "@mui/material/TableRow";
 import TableSortLabel from "@mui/material/TableSortLabel";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { clientState } from "../../Atoms/clientAtom";
 
 import Paper from "@mui/material/Paper";
@@ -24,6 +24,7 @@ import MedicalServicesIcon from "@mui/icons-material/MedicalServices";
 import LibraryBooksIcon from "@mui/icons-material/LibraryBooks";
 
 import { Link } from "react-router-dom";
+import { activeUserState } from "../../Atoms/userAtom";
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -148,6 +149,7 @@ EnhancedTableToolbar.propTypes = {
 
 export default function AttendanceList() {
   const [rows, setRows] = useRecoilState(clientState);
+  const activeUser = useRecoilValue(activeUserState);
 
   const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState("firstName");
@@ -215,7 +217,6 @@ export default function AttendanceList() {
       <div className="new-expense">
         <Button endIcon={<LibraryBooksIcon />}>
           <Link to={"/registros-diarios"}>Registros diarios</Link>
-          
         </Button>
       </div>
       <CardContent>
@@ -278,18 +279,20 @@ export default function AttendanceList() {
                               </Link>
                             </Button>
                           </TableCell>
-                          <TableCell>
-                            <Button
-                              variant="contained"
-                              color="primary"
-                              fullWidth
-                              endIcon={<AddCircleIcon />}
-                            >
-                              <Link to={`/atencion-medica?ci=${row.ci}`}>
-                                Nuevo Registro
-                              </Link>
-                            </Button>
-                          </TableCell>
+                          {activeUser.rol === "doctor" && (
+                            <TableCell>
+                              <Button
+                                variant="contained"
+                                color="primary"
+                                fullWidth
+                                endIcon={<AddCircleIcon />}
+                              >
+                                <Link to={`/atencion-medica?ci=${row.ci}`}>
+                                  Nuevo Registro
+                                </Link>
+                              </Button>
+                            </TableCell>
+                          )}
                         </TableRow>
                       );
                     })}

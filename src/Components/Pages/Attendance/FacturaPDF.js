@@ -5,7 +5,7 @@ import React from 'react'
 
 function FacturaPDF() {
   return (
-    <div>hola</div>
+    <div>FacturaPDF</div>
   )
 }
 

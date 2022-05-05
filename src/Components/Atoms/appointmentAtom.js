@@ -6,7 +6,7 @@ export const appointmentState = atom({
     {
       id: 0,
       paciente: 'Andres Frias',
-      date: '4/05/2022',
+      date: '4/5/2022',
       hora: '18:55',
       doctor: 'Dr. Espinoza Iturri Rodrigo',
       motivo: 'Dolor lumbar'

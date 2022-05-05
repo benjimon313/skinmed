@@ -6,6 +6,9 @@ export const attendanceState = atom({
     {
         id: 1,
         ci: 6352362,
+        firstName: 'Andres',
+        lastName: 'Frias',
+        date: new Date(),
         presion: '90',
         temp: '30',
         peso:'77',
@@ -29,8 +32,8 @@ export const attendanceState = atom({
             indicaciones:'cada 9 horas'
         }],
         procedimientoMedico: [{
-            procedimiento:'Ac. inyeccion ',
-            precio: '400'
+            name:'Ac. inyeccion ',
+            price: '400'
         }],
         examenes: [{
             nombre:'Diferido',

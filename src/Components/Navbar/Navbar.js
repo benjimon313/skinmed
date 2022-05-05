@@ -4,12 +4,15 @@ import { Button } from "../Pages/Button";
 import { Link } from "react-router-dom";
 import Dropdown from "../Pages/Dropdown";
 import MenuIcon from '@mui/icons-material/Menu';
+import { activeUserState } from "../Atoms/userAtom";
 
 import './Navbar.css'
+import { useRecoilState } from "recoil";
 
 const Navbar = () => {
   const [click, setClick] = useState(false);
 	const [dropdown, setDropdown] = useState(false);
+  const [activeUser, setActiveUser] = useRecoilState(activeUserState);
 
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
@@ -61,9 +64,9 @@ const Navbar = () => {
             </Link>
           </li>
 					<li className="nav-item">
-            <Link to="/iniciar-sesion" className="nav-links-mobile" onClick={closeMobileMenu}>
+            <button className="nav-links-mobile" onClick={()=>setActiveUser(null)}>
               Cerrar Sesion
-            </Link>
+            </button>
           </li>
           
         </ul>

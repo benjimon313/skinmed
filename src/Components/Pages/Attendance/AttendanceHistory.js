@@ -197,7 +197,7 @@ const AttendanceHistory = () => {
                             <h4>Procedimiento</h4>
                             {pacientAttendance.procedimientoMedico.map(
                               (procedimiento) => (
-                                <p>{procedimiento.procedimiento}</p>
+                                <p>{procedimiento.name}</p>
                               )
                             )}
                           </TableCell>
@@ -206,7 +206,7 @@ const AttendanceHistory = () => {
                             <h4>Precio</h4>
                             {pacientAttendance.procedimientoMedico.map(
                               (procedimiento) => (
-                                <p>{procedimiento.precio}</p>
+                                <p>{procedimiento.price}</p>
                               )
                             )}
                           </TableCell>

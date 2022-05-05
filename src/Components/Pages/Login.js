@@ -1,52 +1,60 @@
-import React from 'react';
+import React, { useState } from "react";
+
+import Card from "@mui/material/Card";
+import Grid from "@mui/material/Grid";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import { TextField } from "@mui/material";
+import Box from "@mui/material/Box";
+
+import "./Login.css";
+import { useRecoilState, useRecoilValue } from "recoil";
+import {userState, activeUserState} from "../Atoms/userAtom"
 
 function Login() {
-
+    const usersList = useRecoilValue(userState);
+    const [activeUser, setActiveUser] = useRecoilState(activeUserState);
+    const [username, setUsername] = useState();
+    const [password, setPassword] = useState();
+    const verifyUser = () => {
+        console.log(username,password);
+        const userIndex = usersList.findIndex(
+            (user) => user.username === username
+          );
+          if(usersList[userIndex]?.pass === password){
+              setActiveUser({username:username, rol:usersList[userIndex].rol})
+          } else {
+              console.log("Usuario y/o contrasenha invalidas");
+          }
+    }
     
-    return (
-        <div className="flex flex-col md:flex-row
-                        h-screen w-full
-                        md:divide-x divide-gray-500
-                        gap-5 md:gap-10
-                        items-center justify-center
-                        text-white bg-black">
-            <h1 className="font-['Anton'] text-9xl">BLITZ</h1>
-            <div className="flex flex-col px-10 gap-4">
-                <form className="flex flex-col
-                                 w-[20rem] p-10 gap-4
-                                 border border-white rounded
-                                 text-sm">
-                    <input className="p-3
-                                      w-full
-                                      border border-white rounded
-                                      bg-transparent"
-                           id="username"
-                           type="text"
-                           required
-                           placeholder="Phone, email, or username" />
-                    <input className="p-3
-                                      w-full
-                                      border border-white rounded
-                                      bg-transparent"
-                           id="password"
-                           type="password"
-                           required
-                           placeholder="Password" />
-                    <button className="py-3
-                                       w-full
-                                       border border-white rounded
-                                       bg-white text-black
-                                       justify-center items-center">
-                        Log In
-                    </button>
-                    <button className="text-gray-400">Forgot password?</button>
-                </form>
-                <div className="flex py-4 w-[20rem] border border-white rounded items-center justify-center text-sm">
-                    <span className="text-gray-400">Don't have an account? <button className="text-white">Sign Up</button></span>
-                </div>
-            </div>
-        </div>
-    );
+  return (
+    <div className="login-wrapper">
+      <Card>
+        <CardContent>
+          <form>
+            <Grid container>
+              <Box>
+                <Grid item xs={12} sx={{ m: 1, p: 2 }}>
+                  <TextField label="Usuario" variant="outlined"  onChange={(event) => setUsername(event.target.value)} fullWidth />
+                </Grid>
+                <Grid item xs={12} sx={{ m: 1, p: 2 }}>
+                  <TextField label="Contraseña" type="password" variant="outlined" onChange={(event) => setPassword(event.target.value)} fullWidth />
+
+                  <div className="new-expense">
+                    <Button onClick={verifyUser}>Iniciar Sesion</Button>
+                  </div>
+                </Grid>
+              </Box>
+            </Grid>
+          </form>
+        </CardContent>
+      </Card>
+    </div>
+  );
 }
 
 export default Login;
