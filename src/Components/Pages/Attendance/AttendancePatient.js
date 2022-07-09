@@ -24,6 +24,7 @@ import { clientSelectedState, clientState } from "../../Atoms/clientAtom";
 
 import { attendanceState } from "../../Atoms/attendanceAtom";
 import { proceduresState } from "../../Atoms/proceduresAtom";
+import { cieState } from "../../Atoms/cieAtom";
 
 import MedicalServicesIcon from "@mui/icons-material/MedicalServices";
 
@@ -31,6 +32,7 @@ const AttendancePatient = () => {
   const [rows, setRows] = useRecoilState(clientState);
   const [consults, setConsults] = useRecoilState(attendanceState);
   const [procedures, setProcedures] = useRecoilState(proceduresState);
+  const [cie, setCie] = useRecoilState(cieState);
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
   const clientIndex = rows.findIndex(
@@ -87,7 +89,11 @@ const AttendancePatient = () => {
     label === "diagnostico" &&
       (atenciones = { ...atenciones, diagnostico: text });
     label === "cie10" && (atenciones = { ...atenciones, cie10: text });
-    label === "procedimiento" && (atenciones = { ...atenciones, procedimientoMedico: [...listaProcedimientos] });
+    label === "procedimiento" &&
+      (atenciones = {
+        ...atenciones,
+        procedimientoMedico: [...listaProcedimientos],
+      });
     label === "examen" &&
       (atenciones = { ...atenciones, examenes: [...listaExamenes] });
     label === "laboratorio" &&
@@ -100,7 +106,11 @@ const AttendancePatient = () => {
   const changeProcedureHandler = (value) => {
     const nuevoId = nuevaAtencion.procedimientoMedico.length;
     const nuevoProcedimiento = procedures[value];
-    setProcedimiento({ id: nuevoId, name: nuevoProcedimiento.name, price: nuevoProcedimiento.price });
+    setProcedimiento({
+      id: nuevoId,
+      name: nuevoProcedimiento.name,
+      price: nuevoProcedimiento.price,
+    });
   };
   const changeExamHandler = (text, label) => {
     let nuevoExamen = { ...examen };
@@ -270,17 +280,21 @@ const AttendancePatient = () => {
                       rows={4}
                       fullWidth
                     />
-                    <FormControl fullWidth>
-                      <InputLabel sx={{ m: 1 }}>CIE-10</InputLabel>
+                    <FormControl fullWidth sx={{ m: 1}}>
+                      <InputLabel id="demo-simple-select-label">
+                        Cie-10
+                      </InputLabel>
                       <Select
-                        onChange={(event) =>
-                          changeHandler(event.target.value, "cie10")
-                        }
-                        sx={{ m: 1 }}
-                        label="CIE-10"
-                        fullWidth
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        label="Cie-10"
+                        
                       >
-                        <MenuItem>Ten</MenuItem>
+                        {cie.map((cie) => (
+                          <MenuItem value={cie?.codigo}>
+                            {cie?.codigo}
+                          </MenuItem>
+                        ))}
                       </Select>
                     </FormControl>
                   </Grid>
@@ -349,34 +363,36 @@ const AttendancePatient = () => {
             <Grid item xs={12} sm={5}>
               <Box sx={{ p: 2, m: 1, border: "1px solid grey" }}>
                 <h3>Planes de tratamiento: </h3>
-                <FormControl fullWidth sx={{ m: 2, p:1}}>
-                  <InputLabel id="demo-simple-select-label">Procedimiento Medico</InputLabel>
+                <FormControl fullWidth sx={{ m: 2, p: 1 }}>
+                  <InputLabel id="demo-simple-select-label">
+                    Procedimiento Medico
+                  </InputLabel>
                   <Select
-                  
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
                     label="Procedimiento Medico"
-                    onChange={(event) => 
+                    onChange={(event) =>
                       changeProcedureHandler(event.target.value)
                     }
                   >
-
-                    {procedures.map((procedure) =>
-                      <MenuItem value={procedure?.id}>{procedure?.name}</MenuItem>
-                    )}
+                    {procedures.map((procedure) => (
+                      <MenuItem value={procedure?.id}>
+                        {procedure?.name}
+                      </MenuItem>
+                    ))}
                   </Select>
                 </FormControl>
                 <div className="new-expense__actions">
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      // CAMBIAR A RECETA
-                      onClick={() => changeHandler("", "procedimiento")}
-                      endIcon={<MedicalServicesIcon />}
-                    >
-                      Agregar Procedimiento
-                    </Button>
-                  </div>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    // CAMBIAR A RECETA
+                    onClick={() => changeHandler("", "procedimiento")}
+                    endIcon={<MedicalServicesIcon />}
+                  >
+                    Agregar Procedimiento
+                  </Button>
+                </div>
               </Box>
 
               <Box sx={{ p: 2, m: 1, border: "1px solid grey" }}>

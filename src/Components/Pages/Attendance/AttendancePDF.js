@@ -2,7 +2,7 @@ import React from 'react'
 
 function AttendancePDF() {
   return (
-    <div>AttendancePDF</div>
+    <div>..</div>
   )
 }
 

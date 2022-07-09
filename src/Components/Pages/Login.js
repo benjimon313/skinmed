@@ -10,6 +10,7 @@ import Typography from "@mui/material/Typography";
 import { TextField } from "@mui/material";
 import Box from "@mui/material/Box";
 
+import skinmed from './imagss/skinmed.jpeg'
 import "./Login.css";
 import { useRecoilState, useRecoilValue } from "recoil";
 import {userState, activeUserState} from "../Atoms/userAtom"
@@ -33,10 +34,13 @@ function Login() {
     
   return (
     <div className="login-wrapper">
+      <img src={skinmed} alt= " " width="300" height="250" align="right"/>
       <Card>
         <CardContent>
+        
           <form>
             <Grid container>
+              
               <Box>
                 <Grid item xs={12} sx={{ m: 1, p: 2 }}>
                   <TextField label="Usuario" variant="outlined"  onChange={(event) => setUsername(event.target.value)} fullWidth />

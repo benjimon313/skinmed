@@ -144,10 +144,10 @@ const AttendanceHistory = () => {
                 id="panel1bh-header"
               >
                 <Typography sx={{ width: "33%", flexShrink: 0 }}>
-                  Atencion Medica: 27/2/2021
+                  Atencion Medica {pacientAttendance.id}
                 </Typography>
                 <Typography sx={{ color: "text.secondary" }}>
-                  Procedimiento: Ac. Hialuronico
+                  Motivo: {pacientAttendance.motivConsult}
                 </Typography>
               </AccordionSummary>
               <AccordionDetails>
@@ -222,8 +222,8 @@ const AttendanceHistory = () => {
                     color="primary"
                     endIcon={<FileDownloadIcon />}
                   >
-                    <Link to={"/factura-pdf"}>
-                      Recibo PDF</Link>
+                    
+                      Recibo PDF
                   </Button>
                   <Button
                     sx={{ m: 2, p: 1 }}
@@ -231,7 +231,7 @@ const AttendanceHistory = () => {
                     color="primary"
                     endIcon={<FileDownloadIcon />}
                   >
-                    <Link to={"/registros-pdf"}>Exportar PDF Consulta</Link>
+                    Exportar PDF Consulta
                     
                   </Button>
                  

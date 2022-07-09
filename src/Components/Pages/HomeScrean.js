@@ -6,24 +6,29 @@ import Typography from '@mui/material/Typography';
 import { Grid } from '@mui/material';
 import { Link } from 'react-router-dom';
 
+import aten from './imagss/atenmedica.jpeg'
+import pacien from './imagss/pacientes.jpeg'
+import meds from './imagss/meds.jpeg'
+import calendario from './imagss/calendario.jpeg'
+
 const images = [
   {
-    url: './src/img/atenmedica.jpeg',
+    url: aten,
     title: 'Iniciar Consulta',
     width: '50%',
   },
   {
-    url: '/static/images/buttons/burgers.jpg',
+    url: pacien,
     title: 'Pacientes',
     width: '50%',
   },
 	{
-    url: '/static/images/buttons/burgers.jpg',
+    url: meds,
     title: 'Procedimientos',
     width: '50%',
   },
 	{
-    url: '/static/images/buttons/burgers.jpg',
+    url: calendario,
     title: 'Agenda',
     width: '50%',
   },
