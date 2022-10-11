@@ -16,6 +16,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import { Link } from "react-router-dom";
 
 import { useRecoilState } from "recoil";
 import { clientSelectedState, clientState } from "../../Atoms/clientAtom";
@@ -151,12 +152,13 @@ const PatientsInfo = () => {
                       let extraInfoValue = [...rows]
                       extraInfoValue[clientIndex] = {...extraInfoValue[clientIndex], extraInfo : extraInfo}
                       setRows (extraInfoValue);
+                      alert('Informacion agregada')
                       console.log(extraInfoValue)
                       
                     }}
                     endIcon={<AddIcon />}
                   >
-                    Agregar Informacion
+                    <Link to={`/agregar-paciente`}>Agregar Informacion</Link>
                   </Button>
                 </Grid>
               </Grid>

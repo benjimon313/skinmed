@@ -13,6 +13,8 @@ import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import TableSortLabel from "@mui/material/TableSortLabel";
 
+import Switch from "@mui/material/Switch";
+
 import Paper from "@mui/material/Paper";
 import { visuallyHidden } from "@mui/utils";
 import { Button, Card, CardContent, TextField } from "@mui/material";
@@ -50,6 +52,12 @@ function stableSort(array, comparator) {
 }
 
 const headCells = [
+  {
+    id: "asistencia",
+    numeric: false,
+    disablePadding: true,
+    label: "Asistencia",
+  },
   {
     id: "name",
     numeric: false,
@@ -212,13 +220,13 @@ export default function AgendaTable() {
       (listaPacientes[index] = { ...listaPacientes[index], paciente: text });
     label === "date" &&
       (listaPacientes[index] = { ...listaPacientes[index], date: text });
-      label === "hora" &&
+    label === "hora" &&
       (listaPacientes[index] = { ...listaPacientes[index], hora: text });
     label === "doctor" &&
       (listaPacientes[index] = { ...listaPacientes[index], doctor: text });
     label === "motivo" &&
       (listaPacientes[index] = { ...listaPacientes[index], motivo: text });
-    
+
     setRows(listaPacientes);
     console.log(index);
   };
@@ -275,8 +283,8 @@ export default function AgendaTable() {
                               scope="row"
                               padding="none"
                             ></TableCell>
-
-                            <TableCell align="left">{row.paciente}</TableCell>
+                            <Switch color="success" />
+                            <TableCell align="left">{row.paciente} </TableCell>
 
                             {!isItemSelected && (
                               <TableCell align="left">{row.date}</TableCell>
@@ -295,7 +303,7 @@ export default function AgendaTable() {
                                 />
                               </TableCell>
                             )}
-                             {!isItemSelected && (
+                            {!isItemSelected && (
                               <TableCell align="left">{row.hora}</TableCell>
                             )}
                             {isItemSelected && (

@@ -311,7 +311,7 @@ export default function PatientsTableSort() {
                             >
                                <Link to={`/agregar-info?ci=${row.ci}`} 
                                 >
-                                  Agregar Informacion 
+                                  Agregar Info
                                 </Link>
                               
                             </Button>

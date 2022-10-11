@@ -12,6 +12,8 @@ import TableRow from "@mui/material/TableRow";
 import TableSortLabel from "@mui/material/TableSortLabel";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 
+
+import DownloadIcon from "@mui/icons-material/Download";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { clientState } from "../../Atoms/clientAtom";
 
@@ -319,6 +321,15 @@ export default function AttendanceList() {
             />
           </Paper>
         </Box>
+        <Button
+                    variant="contained"
+                    color="primary"
+                    endIcon={<DownloadIcon />}
+                  >
+                    <Link to={`/analisis-completos`}>
+                      Descargar Analisis de laboratorio 
+                    </Link>
+                  </Button>
       </CardContent>
     </Card>
   );

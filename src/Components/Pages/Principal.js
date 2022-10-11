@@ -18,6 +18,7 @@ import AttendancePDF from "./Attendance/AttendancePDF";
 import { useRecoilValue } from "recoil";
 import { activeUserState } from "../Atoms/userAtom";
 import Login from "./Login";
+import AnalisisCompletos from "./Attendance/AnalisisCompletos";
 
 function Principal() {
   const activeUser = useRecoilValue(activeUserState);
@@ -40,6 +41,7 @@ function Principal() {
           <Route path="/historial-clinico" element={<AttendanceHistory />} />
           <Route path="/factura-pdf" element={<FacturaPDF />} />
           <Route path="/registros-pdf" element={<AttendancePDF />} />
+          <Route path="/analisis-completos" element={<AnalisisCompletos />} />
         </Routes>
       </Router>
     );

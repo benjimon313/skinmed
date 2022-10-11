@@ -12,9 +12,12 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
+import { Link } from "react-router-dom";
 
 import FormControl from "@mui/material/FormControl";
 
+import Badge from "@mui/material/Badge";
+import DriveFolderUploadIcon from "@mui/icons-material/DriveFolderUpload";
 import Select from "@mui/material/Select";
 
 import "./AttendanceHistory.css";
@@ -142,7 +145,13 @@ const AttendancePatient = () => {
     listaConsultas.push(nuevaAtencion);
     console.log(listaConsultas);
     setConsults(listaConsultas);
+    alert("Consulta Registrada");
   };
+
+  const [badgePrc, setBadgePrc] = useState(0);
+  const [badgeRec, setBadgeRec] = useState(0);
+  const [badgeExm, setBadgeExm] = useState(0);
+  const [badgeAnal, setBadgeAnal] = useState(0);
 
   return (
     <div>
@@ -280,7 +289,7 @@ const AttendancePatient = () => {
                       rows={4}
                       fullWidth
                     />
-                    <FormControl fullWidth sx={{ m: 1}}>
+                    <FormControl fullWidth sx={{ m: 1 }}>
                       <InputLabel id="demo-simple-select-label">
                         Cie-10
                       </InputLabel>
@@ -288,12 +297,9 @@ const AttendancePatient = () => {
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
                         label="Cie-10"
-                        
                       >
                         {cie.map((cie) => (
-                          <MenuItem value={cie?.codigo}>
-                            {cie?.codigo}
-                          </MenuItem>
+                          <MenuItem value={cie?.codigo}>{cie?.codigo}</MenuItem>
                         ))}
                       </Select>
                     </FormControl>
@@ -350,13 +356,21 @@ const AttendancePatient = () => {
                       variant="contained"
                       color="primary"
                       // CAMBIAR A RECETA
-                      onClick={() => changeHandler("", "receta")}
+                      onClick={() => {
+                        changeHandler("", "receta");
+                        window.alert("Receta Agregada");
+                        var auxiliar = badgeRec + 1;
+                        setBadgeRec(auxiliar);
+                      }}
                       endIcon={<MedicalServicesIcon />}
                     >
                       Agregar Receta
                     </Button>
                   </div>
                 </Grid>
+                <Badge badgeContent={badgeRec} color="primary">
+                  <DriveFolderUploadIcon color="action" />
+                </Badge>
               </Box>
             </Grid>
 
@@ -382,17 +396,28 @@ const AttendancePatient = () => {
                     ))}
                   </Select>
                 </FormControl>
+
                 <div className="new-expense__actions">
                   <Button
                     variant="contained"
                     color="primary"
                     // CAMBIAR A RECETA
-                    onClick={() => changeHandler("", "procedimiento")}
+                    onClick={() => {
+                      changeHandler("", "procedimiento");
+
+                      window.alert("Procedimiento Agregado");
+
+                      var auxiliar = badgePrc + 1;
+                      setBadgePrc(auxiliar);
+                    }}
                     endIcon={<MedicalServicesIcon />}
                   >
                     Agregar Procedimiento
                   </Button>
                 </div>
+                <Badge badgeContent={badgePrc} color="primary">
+                  <DriveFolderUploadIcon color="action" />
+                </Badge>
               </Box>
 
               <Box sx={{ p: 2, m: 1, border: "1px solid grey" }}>
@@ -425,12 +450,20 @@ const AttendancePatient = () => {
                   <Button
                     variant="contained"
                     color="primary"
-                    onClick={() => changeHandler("", "examen")}
+                    onClick={() => {
+                      changeHandler("", "examen");
+                      window.alert("Examen Complementario Agregado");
+                      var auxiliar = badgeExm + 1;
+                      setBadgeExm(auxiliar);
+                    }}
                     endIcon={<MedicalServicesIcon />}
                   >
                     Agregar Examen
                   </Button>
                 </div>
+                <Badge badgeContent={badgeExm} color="primary">
+                  <DriveFolderUploadIcon color="action" />
+                </Badge>
               </Box>
 
               <Box sx={{ p: 2, m: 1, border: "1px solid grey" }}>
@@ -464,12 +497,20 @@ const AttendancePatient = () => {
                     variant="contained"
                     color="primary"
                     // CAMBIAR A LABORATORIO
-                    onClick={() => changeHandler("", "laboratorio")}
+                    onClick={() => {
+                      changeHandler("", "laboratorio");
+                      window.alert("Analisis de Laboratorio Agregado");
+                      var auxiliar = badgeAnal + 1;
+                      setBadgeAnal(auxiliar);
+                    }}
                     endIcon={<MedicalServicesIcon />}
                   >
                     Agregar Analisis
                   </Button>
                 </div>
+                <Badge badgeContent={badgeAnal} color="primary">
+                  <DriveFolderUploadIcon color="action" />
+                </Badge>
               </Box>
             </Grid>
           </Grid>
@@ -480,7 +521,7 @@ const AttendancePatient = () => {
             fullWidth
             endIcon={<MedicalServicesIcon />}
           >
-            Agregar Consulta
+            <Link to={`/iniciar-consulta`}>Agregar Consulta</Link>
           </Button>
         </CardContent>
       </Card>
